@@ -26,13 +26,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (true) {
-            return true;
-        }
         String token = request.getHeader("token"); // 从 http 请求头中取出 token
         if (StringUtils.isEmpty(token)) {
             returnJson(response,"未登录");
-
+            return false;
         }
         AdminUser user=null;
         try {
@@ -44,7 +41,12 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         if (user == null) {
             returnJson(response,"token错误");
             return false;
+        }
 
+        String currentToken = (String) request.getSession().getAttribute(user.getUsername());
+        if (currentToken == null) {
+            returnJson(response,"未登录");
+            return false;
         }
 
         if (!JwtUtil.validToken(token)) {

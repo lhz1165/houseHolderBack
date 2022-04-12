@@ -4,6 +4,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author: lhz
@@ -30,4 +35,12 @@ public class SpringUtils implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) {
         SpringUtils.applicationContext = applicationContext;
     }
+
+    public static HttpSession getHttpSession() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+                .getRequest();
+        return request.getSession();
+    }
 }
+
+

@@ -3,18 +3,20 @@ package com.example.householderback.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.householderback.commom.Result;
-import com.example.householderback.dao.UserMapper;
+import com.example.householderback.dao.AdminUserMapper;
 import com.example.householderback.entity.AdminUser;
 import com.example.householderback.service.AdminUserService;
 import com.example.householderback.utils.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author: lhz
  * @date: 2020/10/26
  **/
 @Service
-public class AdminUserServiceImpl extends ServiceImpl<UserMapper, AdminUser> implements AdminUserService {
+public class AdminUserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUser> implements AdminUserService {
 
     @Override
     public Result<String> register(String username, String password) {
@@ -30,7 +32,7 @@ public class AdminUserServiceImpl extends ServiceImpl<UserMapper, AdminUser> imp
     }
 
     @Override
-    public Result<String> login(String username,String password) {
+    public Result<String> login(String username,String password, HttpSession session) {
         AdminUser userInDB = lambdaQuery()
                 .eq(AdminUser::getUsername,username)
                 .one();
@@ -41,14 +43,17 @@ public class AdminUserServiceImpl extends ServiceImpl<UserMapper, AdminUser> imp
                 .equals(password)) {
             return Result.failed("密码错误");
         }
-        return Result.succeed(JwtUtil.createToken(userInDB));
+        String token = JwtUtil.createToken(userInDB);
+        session.setAttribute(username,token);
+        return Result.succeed(token);
 
     }
 
-
-
-
-
+    @Override
+    public Result<String> logout(String username, HttpSession session) {
+        session.removeAttribute(username);
+        return Result.succeed();
+    }
 
 
 }

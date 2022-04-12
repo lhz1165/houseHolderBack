@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.householderback.entity.AdminUser;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -58,6 +59,12 @@ public class JwtUtil {
         } catch (Exception e) {
             return false;
         }
+    }
+
+
+    public static void ClearToken(String token, HttpSession session) {
+
+
     }
 
 
