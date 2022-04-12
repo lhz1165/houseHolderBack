@@ -2,7 +2,7 @@ package com.example.householderback.config;
 
 
 import com.example.householderback.commom.Result;
-import com.example.householderback.entity.AdminUser;
+import com.example.householderback.entity.User;
 import com.example.householderback.service.AdminUserService;
 import com.example.householderback.utils.SpringUtils;
 import com.example.householderback.utils.jwt.JwtUtil;
@@ -31,7 +31,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             returnJson(response,"未登录");
             return false;
         }
-        AdminUser user=null;
+        User user=null;
         try {
             user = userService.getById(JwtUtil.parseUserId(token));
         } catch (Exception e) {
@@ -43,11 +43,11 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        String currentToken = (String) request.getSession().getAttribute(user.getUsername());
-        if (currentToken == null) {
-            returnJson(response,"未登录");
-            return false;
-        }
+//        String currentToken = (String) request.getSession().getAttribute(user.getUsername());
+//        if (currentToken == null) {
+//            returnJson(response,"未登录");
+//            return false;
+//        }
 
         if (!JwtUtil.validToken(token)) {
             returnJson(response,"token过期");

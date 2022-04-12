@@ -3,105 +3,46 @@ package com.example.householderback.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
- * <p>
- * 
- * </p>
- *
- * @author lhz
- * @since 2022-04-12
- */
+ * @author: lhz
+ * @date: 2020/10/26
+ **/
+@ApiModel
 @TableName("user")
-public class User implements Serializable {
+public class User {
 
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /**
-     * 账号
-     */
+    @ApiModelProperty(dataType = "String",name = "username",example = "admin")
     private String username;
 
-    /**
-     * 姓名
-     */
-    private String realName;
-
-    /**
-     * 民族
-     */
-    private String race;
-
-    /**
-     * 籍贯
-     */
-    private String place;
-
-    /**
-     * 户口类型 常住/外地
-     */
-    private String type;
-
-    /**
-     * 生日
-     */
-    private LocalDateTime birthday;
-
-    /**
-     * 身份证
-     */
-    private String identity;
-
-    /**
-     * 密码
-     */
+    @ApiModelProperty(dataType = "String",name = "password",example = "123456")
     private String password;
 
-    /**
-     * 健康状况
-     */
-    private String healhty;
+    @ApiModelProperty(dataType = "String",name = "type",example = "1")
+    private String type;
 
-    /**
-     * 单位
-     */
-    private String company;
 
-    /**
-     * 联系人
-     */
-    private String contacts;
+    public User() {
+    }
 
-    /**
-     * 联系电话
-     */
-    private String phone;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
-    /**
-     * 单位地址
-     */
-    private String address;
+    public String getType() {
+        return type;
+    }
 
-    /**
-     * 户籍状态 迁出/迁出/注销
-     */
-    private String status;
-
-    /**
-     * 户籍号
-     */
-    private Integer householderId;
-
-    /**
-     * 性别
-     */
-    private String gender;
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public Integer getId() {
         return id;
@@ -110,6 +51,7 @@ public class User implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getUsername() {
         return username;
     }
@@ -117,48 +59,7 @@ public class User implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getRealName() {
-        return realName;
-    }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-    public LocalDateTime getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDateTime birthday) {
-        this.birthday = birthday;
-    }
-    public String getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity;
-    }
     public String getPassword() {
         return password;
     }
@@ -166,83 +67,13 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getHealhty() {
-        return healhty;
-    }
-
-    public void setHealhty(String healhty) {
-        this.healhty = healhty;
-    }
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-    public String getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(String contacts) {
-        this.contacts = contacts;
-    }
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public Integer getHouseholderId() {
-        return householderId;
-    }
-
-    public void setHouseholderId(Integer householderId) {
-        this.householderId = householderId;
-    }
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
     @Override
     public String toString() {
         return "User{" +
-            "id=" + id +
-            ", username=" + username +
-            ", realName=" + realName +
-            ", race=" + race +
-            ", place=" + place +
-            ", type=" + type +
-            ", birthday=" + birthday +
-            ", identity=" + identity +
-            ", password=" + password +
-            ", healhty=" + healhty +
-            ", company=" + company +
-            ", contacts=" + contacts +
-            ", phone=" + phone +
-            ", address=" + address +
-            ", status=" + status +
-            ", householderId=" + householderId +
-            ", gender=" + gender +
-        "}";
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

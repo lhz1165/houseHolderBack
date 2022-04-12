@@ -1,6 +1,6 @@
 package com.example.householderback.config;
 
-import com.example.householderback.entity.AdminUser;
+import com.example.householderback.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -45,7 +45,7 @@ public class SwaggerConfig {
                 .build()
                 .globalOperationParameters(pars)
                 .apiInfo(apiInfo())
-                .ignoredParameterTypes(AdminUser.class);
+                .ignoredParameterTypes(User.class);
     }
 
     private ApiInfo apiInfo() {

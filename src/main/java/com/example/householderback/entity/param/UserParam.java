@@ -9,12 +9,22 @@ public class UserParam {
 
     String password;
 
+    String type;
+
     public UserParam() {
     }
 
     public UserParam(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getUsername() {

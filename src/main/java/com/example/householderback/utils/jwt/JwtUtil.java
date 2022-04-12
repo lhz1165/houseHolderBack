@@ -2,7 +2,7 @@ package com.example.householderback.utils.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.householderback.entity.AdminUser;
+import com.example.householderback.entity.User;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -15,11 +15,11 @@ import java.util.Date;
  **/
 public class JwtUtil {
 
-    public static String createToken(AdminUser adminUser) {
+    public static String createToken(User user) {
         String token = "";
         token = JWT.create().withExpiresAt(addDays(1)) //生存时间为1天
-                .withAudience(adminUser.getId()+"")
-                .sign(Algorithm.HMAC256(adminUser.getPassword()));
+                .withAudience(user.getId()+"")
+                .sign(Algorithm.HMAC256(user.getPassword()));
         return token;
     }
 

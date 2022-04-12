@@ -1,7 +1,7 @@
 package com.example.householderback.utils;
 
 
-import com.example.householderback.entity.AdminUser;
+import com.example.householderback.entity.User;
 import com.example.householderback.service.AdminUserService;
 import com.example.householderback.utils.jwt.JwtUtil;
 import org.springframework.core.MethodParameter;
@@ -20,7 +20,7 @@ public class TokenArgumentResolver implements HandlerMethodArgumentResolver {
     public boolean supportsParameter(MethodParameter methodParameter) {
         //参数是否有@loginUser注解
         //参数是否是User
-        return (methodParameter.hasParameterAnnotation(LoginUser.class) && methodParameter.getParameterType().equals(AdminUser.class));
+        return (methodParameter.hasParameterAnnotation(LoginUser.class) && methodParameter.getParameterType().equals(User.class));
     }
 
     /**
@@ -42,7 +42,7 @@ public class TokenArgumentResolver implements HandlerMethodArgumentResolver {
         // 处理生态用户注入
         LoginUser memberAnnotation = methodParameter.getParameterAnnotation(LoginUser.class);
         if (memberAnnotation != null) {
-            AdminUser user = userService.getById(JwtUtil.parseUserId(token));
+            User user = userService.getById(JwtUtil.parseUserId(token));
             if (user != null) {
                 return user;
             }
