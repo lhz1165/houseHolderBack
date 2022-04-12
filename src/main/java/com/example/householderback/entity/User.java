@@ -27,6 +27,11 @@ public class User {
     @ApiModelProperty(dataType = "String",name = "type",example = "1")
     private String type;
 
+    @ApiModelProperty(dataType = "String",name = "avatar",example = "xx")
+    private String avatar;
+
+
+
 
     public User() {
     }
@@ -34,6 +39,16 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getType() {
