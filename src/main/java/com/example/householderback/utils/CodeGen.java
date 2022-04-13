@@ -21,8 +21,8 @@ public class CodeGen {
                             .pathInfo(Collections.singletonMap(OutputFile.mapper, "D://test")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("house_hold") // 设置需要生成的表名
-                            .addInclude("user")
+                    builder.addInclude("comment") // 设置需要生成的表名
+                            .addInclude("reply")
                             .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板

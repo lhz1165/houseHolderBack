@@ -64,7 +64,6 @@ public class UserController {
         }
         return userService.logout(user.getUsername(), SpringUtils.getHttpSession());
     }
-
     @ApiOperation("当前用户")
     @PostMapping("/getUserInfo")
     public Result<LoginUserVo> getUserInfo(@LoginUser User user) {
