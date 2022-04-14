@@ -20,8 +20,6 @@ public class Reply implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String content;
-
     private String replyComment;
 
     private LocalDateTime createTime;
@@ -35,13 +33,7 @@ public class Reply implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getContent() {
-        return content;
-    }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
     public String getReplyComment() {
         return replyComment;
     }
@@ -49,6 +41,7 @@ public class Reply implements Serializable {
     public void setReplyComment(String replyComment) {
         this.replyComment = replyComment;
     }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -56,22 +49,12 @@ public class Reply implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public Integer getCid() {
         return cid;
     }
 
     public void setCid(Integer cid) {
         this.cid = cid;
-    }
-
-    @Override
-    public String toString() {
-        return "Reply{" +
-            "id=" + id +
-            ", content=" + content +
-            ", replyComment=" + replyComment +
-            ", createTime=" + createTime +
-            ", replyUser=" + cid +
-        "}";
     }
 }
