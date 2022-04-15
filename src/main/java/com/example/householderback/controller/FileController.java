@@ -23,10 +23,6 @@ public class FileController {
     @Value("${file.address}")
     String fileAddress;
 
-    public static void main(String[] args) {
-        System.out.println("123.jpg".substring("123.jpg".lastIndexOf(".")));
-    }
-
     @PostMapping("/upload")
     public Result<String> upload(@RequestParam("file") MultipartFile file) throws FileNotFoundException {
         String avatarAddr = saveFile(file);
