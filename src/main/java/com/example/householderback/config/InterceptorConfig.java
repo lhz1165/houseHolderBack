@@ -8,11 +8,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.IOException;
@@ -29,14 +31,23 @@ import java.util.List;
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 
-
+    @Value("${file.address}")
+    String fileAddress;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthenticationInterceptor())
-                .excludePathPatterns("/login", "/register")
+                .excludePathPatterns("/login", "/register,/static/**")
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**")
                 .addPathPatterns("/**");
     }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //其中headImage表示访问的前缀。
+        // file:+fileAddress 是文件真实的存储路径
+        registry.addResourceHandler("/headImage/**").addResourceLocations("file:"+fileAddress);
+    }
+
 
     /**
      * 获取用户对象

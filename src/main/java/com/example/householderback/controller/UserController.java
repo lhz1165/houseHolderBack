@@ -3,6 +3,7 @@ package com.example.householderback.controller;
 
 import com.example.householderback.commom.Result;
 import com.example.householderback.entity.User;
+import com.example.householderback.entity.param.UpdateUserParam;
 import com.example.householderback.entity.param.UserParam;
 import com.example.householderback.entity.vo.LoginUserVo;
 import com.example.householderback.service.AdminUserService;
@@ -64,6 +65,7 @@ public class UserController {
         }
         return userService.logout(user.getUsername(), SpringUtils.getHttpSession());
     }
+
     @ApiOperation("当前用户")
     @PostMapping("/getUserInfo")
     public Result<LoginUserVo> getUserInfo(@LoginUser User user) {
@@ -73,6 +75,13 @@ public class UserController {
         LoginUserVo vo = new LoginUserVo();
         BeanUtils.copyProperties(user,vo);
         return Result.succeed(vo);
+    }
+
+    @ApiOperation("update用户")
+    @PostMapping("/user/update")
+    public Result<LoginUserVo> update(@RequestBody UpdateUserParam param) {
+        userService.upDateAvatar(param);
+        return Result.succeed();
     }
 
 

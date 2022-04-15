@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.householderback.commom.Result;
 import com.example.householderback.dao.UserMapper;
 import com.example.householderback.entity.User;
+import com.example.householderback.entity.param.UpdateUserParam;
 import com.example.householderback.service.AdminUserService;
 import com.example.householderback.utils.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,12 @@ public class AdminUserServiceImpl extends ServiceImpl<UserMapper, User> implemen
     public Result<String> logout(String username, HttpSession session) {
         session.removeAttribute(username);
         return Result.succeed();
+    }
+
+    @Override
+    public Result<Boolean> upDateAvatar(UpdateUserParam param) {
+
+        return Result.succeed(lambdaUpdate().eq(User::getId,param.getId()).set(User::getAvatar,param.getPicAddr()).update());
     }
 
 

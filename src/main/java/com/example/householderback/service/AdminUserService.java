@@ -3,6 +3,7 @@ package com.example.householderback.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.householderback.commom.Result;
 import com.example.householderback.entity.User;
+import com.example.householderback.entity.param.UpdateUserParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ public interface AdminUserService extends IService<User> {
     Result<String> login(String username,String password,String type, HttpSession session);
     Result<String> logout(String username,HttpSession session);
 
+    Result<Boolean> upDateAvatar(UpdateUserParam param);
 
 
 }

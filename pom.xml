@@ -102,6 +102,13 @@
             <version>1.7.25</version>
         </dependency>
 
+        <!--直接通过url访问图片 但是只能显示已经打包的-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>
