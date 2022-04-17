@@ -1,6 +1,7 @@
 package com.example.householderback.service.impl;
 
 
+import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.householderback.commom.Result;
 import com.example.householderback.dao.UserMapper;
@@ -27,16 +28,16 @@ public class AdminUserServiceImpl extends ServiceImpl<UserMapper, User> implemen
         if (userInDB != null) {
             return Result.failed("用户名存在");
         }
-        User user = new User(username,password);
+        User user = new User(username, password);
         save(user);
         return Result.succeed("注册成功");
     }
 
     @Override
-    public Result<String> login(String username,String password, String type,HttpSession session) {
+    public Result<String> login(String username, String password, String type, HttpSession session) {
         User userInDB = lambdaQuery()
-                .eq(User::getUsername,username)
-                .eq(User::getType,type)
+                .eq(User::getUsername, username)
+                .eq(User::getType, type)
                 .one();
         if (userInDB == null) {
             return Result.failed("用户名不存在");
@@ -46,7 +47,7 @@ public class AdminUserServiceImpl extends ServiceImpl<UserMapper, User> implemen
             return Result.failed("密码错误");
         }
         String token = JwtUtil.createToken(userInDB);
-        session.setAttribute(username,token);
+        session.setAttribute(username, token);
         return Result.succeed(token);
 
     }
@@ -61,6 +62,16 @@ public class AdminUserServiceImpl extends ServiceImpl<UserMapper, User> implemen
     public Result<Boolean> upDateAvatar(UpdateUserParam param) {
 
         return Result.succeed(lambdaUpdate().eq(User::getId,param.getId()).set(User::getAvatar,param.getPicAddr()).update());
+    }
+
+    @Override
+    public Result<Boolean> updatePass(UpdateUserParam param) {
+
+        if (!param.getPassword2().equals(param.getPassword())) {
+            return Result.failed("密码不一致");
+        }
+        lambdaUpdate().eq(User::getId,param.getId()).set(User::getPassword,param.getPassword()).update();
+        return Result.succeed();
     }
 
 

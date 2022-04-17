@@ -84,5 +84,12 @@ public class UserController {
         return Result.succeed();
     }
 
+    @ApiOperation("update用户")
+    @PostMapping("/user/updatePass")
+    public Result<LoginUserVo> updatePass(@RequestBody UpdateUserParam param) {
+        userService.updatePass(param);
+        return Result.succeed();
+    }
+
 
 }
