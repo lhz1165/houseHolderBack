@@ -1,32 +1,16 @@
-package com.example.householderback.entity;
+package com.example.householderback.entity.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
+import com.example.householderback.entity.UserInfo;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author lhz
- * @since 2022-04-12
- */
-@TableName("house_hold")
-public class HouseHold implements Serializable {
+import java.util.List;
 
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
+public class HouseHoldVo {
     private Integer id;
 
     /**
      * 户主名
      */
     private String householder;
-
-
     /**
      * 户籍地址
      */
@@ -47,6 +31,9 @@ public class HouseHold implements Serializable {
      */
     private String desc;
 
+
+    List<UserInfo> userInfos;
+
     public Integer getId() {
         return id;
     }
@@ -54,6 +41,7 @@ public class HouseHold implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getHouseholder() {
         return householder;
     }
@@ -69,6 +57,7 @@ public class HouseHold implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+
     public Integer getHouseNo() {
         return houseNo;
     }
@@ -76,6 +65,7 @@ public class HouseHold implements Serializable {
     public void setHouseNo(Integer houseNo) {
         this.houseNo = houseNo;
     }
+
     public Integer getPeopleCount() {
         return peopleCount;
     }
@@ -83,6 +73,7 @@ public class HouseHold implements Serializable {
     public void setPeopleCount(Integer peopleCount) {
         this.peopleCount = peopleCount;
     }
+
     public String getDesc() {
         return desc;
     }
@@ -91,15 +82,11 @@ public class HouseHold implements Serializable {
         this.desc = desc;
     }
 
-    @Override
-    public String toString() {
-        return "HouseHold{" +
-            "id=" + id +
-            ", householder=" + householder +
-            ", address=" + address +
-            ", houseNo=" + houseNo +
-            ", peopleCount=" + peopleCount +
-            ", desc=" + desc +
-        "}";
+    public List<UserInfo> getUserInfos() {
+        return userInfos;
+    }
+
+    public void setUserInfos(List<UserInfo> userInfos) {
+        this.userInfos = userInfos;
     }
 }

@@ -1,8 +1,10 @@
 package com.example.householderback.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.householderback.commom.Result;
 import com.example.householderback.entity.User;
+import com.example.householderback.entity.param.PageParam;
 import com.example.householderback.entity.param.UpdateUserParam;
 import com.example.householderback.entity.param.UserParam;
 import com.example.householderback.entity.vo.LoginUserVo;
@@ -91,5 +93,9 @@ public class UserController {
         return Result.succeed();
     }
 
-
+    @ApiOperation("page")
+    @PostMapping("/user/page")
+    public Result<Page<User>> page(@RequestBody PageParam param) {
+        return Result.succeed(userService.page(new Page<>(param.getCurrent(),param.getPageSize())));
+    }
 }

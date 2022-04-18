@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 @RestController
 public class FileController {
@@ -27,6 +28,7 @@ public class FileController {
     public Result<String> upload(@RequestParam("file") MultipartFile file) throws FileNotFoundException {
         String avatarAddr = saveFile(file);
         return Result.succeed(avatarAddr);
+
     }
 
 

@@ -103,6 +103,19 @@ public class UserInfo implements Serializable {
      */
     private String gender;
 
+    /**
+     * 用户账号id
+     */
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     public Integer getId() {
         return id;
     }

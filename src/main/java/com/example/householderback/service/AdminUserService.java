@@ -19,4 +19,5 @@ public interface AdminUserService extends IService<User> {
     Result<Boolean> upDateAvatar(UpdateUserParam param);
 
     Result<Boolean> updatePass(UpdateUserParam param);
+
 }
