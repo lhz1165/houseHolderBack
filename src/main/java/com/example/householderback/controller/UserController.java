@@ -96,6 +96,6 @@ public class UserController {
     @ApiOperation("page")
     @PostMapping("/user/page")
     public Result<Page<User>> page(@RequestBody PageParam param) {
-        return Result.succeed(userService.page(new Page<>(param.getCurrent(),param.getPageSize())));
+        return Result.succeed(userService.lambdaQuery().eq(User::getType,"2").page(new Page<>(param.getCurrent(),param.getPageSize())));
     }
 }

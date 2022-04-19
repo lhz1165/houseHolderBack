@@ -1,7 +1,9 @@
 package com.example.householderback.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.householderback.commom.Result;
 import com.example.householderback.entity.UserInfo;
+import com.example.householderback.entity.param.UserInfoPageParam;
 import com.example.householderback.entity.param.UserParam;
 import com.example.householderback.service.IUserInfoService;
 import io.swagger.annotations.Api;
@@ -21,17 +23,16 @@ public class UserInfoController {
      */
     @ApiOperation("add")
     @PostMapping("/add")
-    public Result<Void> register(@RequestBody UserInfo user) {
-        userInfoService.addUser(user);
-        return Result.succeed();
+    public Result register(@RequestBody UserInfo user) {
+        return userInfoService.addUser(user);
     }
 
 
     /**
-     * add
+     * get
      */
     @ApiOperation("get")
-    @PostMapping("/get")
+    @GetMapping("/get")
     public Result<UserInfo> get(@RequestParam Integer id) {
         return Result.succeed(userInfoService.getById(id));
     }
@@ -43,8 +44,18 @@ public class UserInfoController {
     @ApiOperation("update")
     @PostMapping("/update")
     public Result<Void> update(@RequestBody UserInfo user) {
-        userInfoService.updateById(user);
+        userInfoService.updateUser(user);
         return Result.succeed();
+    }
+
+
+    /**
+     * page
+     */
+    @ApiOperation("page")
+    @PostMapping("/page")
+    public Result<Page<UserInfo>> page(@RequestBody UserInfoPageParam param) {
+        return Result.succeed(userInfoService.pageUserInfo(param));
     }
 
 

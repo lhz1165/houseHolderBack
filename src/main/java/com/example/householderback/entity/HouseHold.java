@@ -32,20 +32,14 @@ public class HouseHold implements Serializable {
      */
     private String address;
 
-    /**
-     * 户号
-     */
-    private Integer houseNo;
+
 
     /**
      * 总人数
      */
     private Integer peopleCount;
 
-    /**
-     * 备注
-     */
-    private String desc;
+
 
     public Integer getId() {
         return id;
@@ -69,13 +63,7 @@ public class HouseHold implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-    public Integer getHouseNo() {
-        return houseNo;
-    }
 
-    public void setHouseNo(Integer houseNo) {
-        this.houseNo = houseNo;
-    }
     public Integer getPeopleCount() {
         return peopleCount;
     }
@@ -83,13 +71,7 @@ public class HouseHold implements Serializable {
     public void setPeopleCount(Integer peopleCount) {
         this.peopleCount = peopleCount;
     }
-    public String getDesc() {
-        return desc;
-    }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
 
     @Override
     public String toString() {
@@ -97,9 +79,7 @@ public class HouseHold implements Serializable {
             "id=" + id +
             ", householder=" + householder +
             ", address=" + address +
-            ", houseNo=" + houseNo +
             ", peopleCount=" + peopleCount +
-            ", desc=" + desc +
         "}";
     }
 }

@@ -73,7 +73,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
             // LocalDateTime 序列化与反序列化
             simpleModule.addSerializer(LocalDateTime.class, LocalDateTimeToStringSerializer.INSTANCE);
-            simpleModule.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
+           // simpleModule.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
 
             ((MappingJackson2HttpMessageConverter) converter).getObjectMapper().registerModule(simpleModule);
         });
@@ -138,22 +138,22 @@ public class InterceptorConfig implements WebMvcConfigurer {
     }
 
 
-    public static final class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
-        public static final LocalDateTimeDeserializer INSTANCE = new LocalDateTimeDeserializer();
-
-        LocalDateTimeDeserializer() {
-        }
-
-        @Override
-        public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-
-            String s = jsonParser.getText().trim();
-            try {
-                long timestamp = Long.parseLong(s) / 1000;
-                return LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.ofHours(8));
-            } catch (Exception ignored) {
-                return LocalDateTime.parse(s);
-            }
-        }
-    }
+//    public static final class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
+//        public static final LocalDateTimeDeserializer INSTANCE = new LocalDateTimeDeserializer();
+//
+//        LocalDateTimeDeserializer() {
+//        }
+//
+//        @Override
+//        public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+//
+//            String s = jsonParser.getText().trim();
+//            try {
+//                long timestamp = Long.parseLong(s) / 1000;
+//                return LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.ofHours(8));
+//            } catch (Exception ignored) {
+//                return LocalDateTime.parse(s);
+//            }
+//        }
+//    }
 }

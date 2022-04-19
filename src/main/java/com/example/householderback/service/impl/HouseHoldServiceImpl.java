@@ -2,12 +2,15 @@ package com.example.householderback.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.householderback.commom.Result;
 import com.example.householderback.dao.CommentMapper;
 import com.example.householderback.dao.HouseHoldMapper;
 import com.example.householderback.entity.Comment;
 import com.example.householderback.entity.HouseHold;
+import com.example.householderback.entity.User;
 import com.example.householderback.entity.UserInfo;
 import com.example.householderback.entity.param.HouseHoldMoveParam;
+import com.example.householderback.entity.param.HouseHoldUpdateParam;
 import com.example.householderback.entity.param.PageParam;
 import com.example.householderback.entity.vo.HouseHoldVo;
 import com.example.householderback.service.AdminUserService;
@@ -26,6 +29,9 @@ public class HouseHoldServiceImpl extends ServiceImpl<HouseHoldMapper, HouseHold
 
     @Autowired
     private IUserInfoService userInfoService;
+
+
+
     @Override
     public Page<HouseHold> page(PageParam param) {
         Page<HouseHold> page = lambdaQuery().page(new Page<>(param.getCurrent(), param.getPageSize()));
@@ -34,6 +40,7 @@ public class HouseHoldServiceImpl extends ServiceImpl<HouseHoldMapper, HouseHold
 
     @Override
     public void addHouseHold(HouseHold houseHold) {
+        houseHold.setPeopleCount(1);
         save(houseHold);
     }
 
@@ -46,14 +53,23 @@ public class HouseHoldServiceImpl extends ServiceImpl<HouseHoldMapper, HouseHold
     public HouseHoldVo get(Integer id) {
         HouseHold entity = getById(id);
         HouseHoldVo vo = new HouseHoldVo();
-        BeanUtils.copyProperties(entity,vo);
+        BeanUtils.copyProperties(entity, vo);
         List<UserInfo> userInfos = userInfoService.lambdaQuery().eq(UserInfo::getHouseholderId, id).list();
         vo.setUserInfos(userInfos);
         return vo;
     }
 
     @Override
-    public void updateHouseHold(HouseHold houseHold) {
-        updateById(houseHold);
+    public Result updateHouseHold(HouseHoldUpdateParam houseHold) {
+        //检查户主是否绑定过
+        HouseHold one = lambdaQuery().eq(HouseHold::getHouseholder, houseHold.getHouseholder()).one();
+        if (one != null && one.getId() != houseHold.getId()) {
+            return Result.failed("户主已经被绑定");
+        }
+        //更新用户
+        HouseHold en = new HouseHold();
+        BeanUtils.copyProperties(houseHold, en);
+        updateById(en);
+        return Result.succeed();
     }
 }

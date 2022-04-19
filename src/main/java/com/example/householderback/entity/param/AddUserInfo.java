@@ -50,10 +50,6 @@ public class AddUserInfo {
      */
     private String healhty;
 
-    /**
-     * 单位
-     */
-    private String company;
 
     /**
      * 联系人

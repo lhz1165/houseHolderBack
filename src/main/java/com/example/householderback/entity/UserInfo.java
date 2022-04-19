@@ -1,6 +1,7 @@
 package com.example.householderback.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -29,6 +30,11 @@ public class UserInfo implements Serializable {
     private String username;
 
     /**
+     * 密码
+     */
+    private String password;
+
+    /**
      * 姓名
      */
     private String realName;
@@ -53,30 +59,12 @@ public class UserInfo implements Serializable {
      */
     private LocalDateTime birthday;
 
+
     /**
      * 身份证
      */
     private String identity;
 
-    /**
-     * 密码
-     */
-    private String password;
-
-    /**
-     * 健康状况
-     */
-    private String healhty;
-
-    /**
-     * 单位
-     */
-    private String company;
-
-    /**
-     * 联系人
-     */
-    private String contacts;
 
     /**
      * 联系电话
@@ -89,7 +77,7 @@ public class UserInfo implements Serializable {
     private String address;
 
     /**
-     * 户籍状态 迁出/迁出/注销
+     * 户籍状态 1迁出/2迁出/3注销
      */
     private String status;
 
@@ -107,6 +95,11 @@ public class UserInfo implements Serializable {
      * 用户账号id
      */
     private Integer userId;
+
+    public void setPassword(String password) {
+
+        this.password = password;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -176,30 +169,7 @@ public class UserInfo implements Serializable {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getHealhty() {
-        return healhty;
-    }
 
-    public void setHealhty(String healhty) {
-        this.healhty = healhty;
-    }
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-    public String getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(String contacts) {
-        this.contacts = contacts;
-    }
     public String getPhone() {
         return phone;
     }
@@ -248,9 +218,7 @@ public class UserInfo implements Serializable {
             ", birthday=" + birthday +
             ", identity=" + identity +
             ", password=" + password +
-            ", healhty=" + healhty +
-            ", company=" + company +
-            ", contacts=" + contacts +
+
             ", phone=" + phone +
             ", address=" + address +
             ", status=" + status +

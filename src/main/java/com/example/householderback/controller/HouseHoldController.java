@@ -2,10 +2,9 @@ package com.example.householderback.controller;
 
 import com.example.householderback.commom.Result;
 import com.example.householderback.entity.HouseHold;
-import com.example.householderback.entity.UserInfo;
 import com.example.householderback.entity.param.HouseHoldMoveParam;
+import com.example.householderback.entity.param.HouseHoldUpdateParam;
 import com.example.householderback.entity.param.PageParam;
-import com.example.householderback.entity.param.UserParam;
 import com.example.householderback.entity.vo.HouseHoldVo;
 import com.example.householderback.service.IHouseHoldService;
 import io.swagger.annotations.Api;
@@ -31,16 +30,15 @@ public class HouseHoldController {
     }
 
     @ApiOperation("get")
-    @PostMapping("/get")
+    @GetMapping("/get")
     public Result<HouseHoldVo> get(@RequestParam Integer id) {
         return Result.succeed(houseHoldService.get(id));
     }
 
     @ApiOperation("update")
     @PostMapping("/update")
-    public Result<String> update(@RequestBody HouseHold houseHold) {
-        houseHoldService.updateHouseHold(houseHold);
-        return Result.succeed();
+    public Result update(@RequestBody HouseHoldUpdateParam houseHold) {
+        return  houseHoldService.updateHouseHold(houseHold);
     }
 
 
