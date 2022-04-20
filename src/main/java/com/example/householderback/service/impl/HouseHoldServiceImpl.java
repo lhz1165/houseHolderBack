@@ -42,6 +42,12 @@ public class HouseHoldServiceImpl extends ServiceImpl<HouseHoldMapper, HouseHold
     public void addHouseHold(HouseHold houseHold) {
         houseHold.setPeopleCount(1);
         save(houseHold);
+
+        userInfoService.lambdaUpdate()
+                .eq(UserInfo::getUsername, houseHold.getHouseholder())
+                .set(UserInfo::getHouseholderId, houseHold.getId())
+                .set(UserInfo::getStatus, "1")
+                .update();
     }
 
     @Override
