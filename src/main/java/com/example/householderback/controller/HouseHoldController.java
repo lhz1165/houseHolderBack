@@ -35,6 +35,7 @@ public class HouseHoldController {
         return Result.succeed(houseHoldService.get(id));
     }
 
+
     @ApiOperation("update")
     @PostMapping("/update")
     public Result update(@RequestBody HouseHoldUpdateParam houseHold) {

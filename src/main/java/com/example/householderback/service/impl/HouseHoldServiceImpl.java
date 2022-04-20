@@ -72,4 +72,6 @@ public class HouseHoldServiceImpl extends ServiceImpl<HouseHoldMapper, HouseHold
         updateById(en);
         return Result.succeed();
     }
+
+
 }

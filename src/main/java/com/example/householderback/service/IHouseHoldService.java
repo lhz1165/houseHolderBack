@@ -20,4 +20,5 @@ public interface IHouseHoldService extends IService<HouseHold> {
 
 
     Result updateHouseHold(HouseHoldUpdateParam houseHold);
+
 }

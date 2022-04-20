@@ -40,6 +40,15 @@ public class HouseHold implements Serializable {
     private Integer peopleCount;
 
 
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Integer getId() {
         return id;
