@@ -60,6 +60,16 @@ public class UserInfoController {
         return Result.succeed();
     }
 
+    /**
+     * 注销或者恢复
+     */
+    @ApiOperation("update")
+    @PostMapping("/deleteOrRecover")
+    public Result<Void> deleteOrRecover(@RequestBody UserInfo user) {
+        userInfoService.deleteOrRecover(user);
+        return Result.succeed();
+    }
+
 
     /**
      * page

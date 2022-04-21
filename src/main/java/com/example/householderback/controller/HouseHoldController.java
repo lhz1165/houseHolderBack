@@ -49,12 +49,5 @@ public class HouseHoldController {
         return Result.succeed(houseHoldService.page(param));
     }
 
-    @PostMapping("/move")
-    @ApiOperation("/迁入或迁出")
-    public Result move(@RequestBody HouseHoldMoveParam param) {
-        houseHoldService.move(param);
-        return Result.succeed();
-    }
-
 
 }

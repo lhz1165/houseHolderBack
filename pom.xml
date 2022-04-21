@@ -82,26 +82,6 @@
             <scope>runtime</scope>
         </dependency>
 
-<!--        &lt;!&ndash;        log&ndash;&gt;-->
-<!--        &lt;!&ndash;log4j依赖&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>log4j</groupId>-->
-<!--            <artifactId>log4j</artifactId>-->
-<!--            <version>1.2.17</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash;slf4j依赖&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-api</artifactId>-->
-<!--            <version>1.7.25</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash;桥接&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-log4j12</artifactId>-->
-<!--            <version>1.7.25</version>-->
-<!--        </dependency>-->
-
         <!--直接通过url访问图片 但是只能显示已经打包的-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

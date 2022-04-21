@@ -39,7 +39,9 @@ public class HouseHold implements Serializable {
      */
     private Integer peopleCount;
 
-
+    /**
+     * 描述
+     */
     private String description;
 
     public String getDescription() {

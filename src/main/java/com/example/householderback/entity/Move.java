@@ -22,7 +22,7 @@ public class Move {
     String type;
 
     /**
-     * 状态是待支付
+     * 状态是1待支付 2已支付
      */
     String status;
 

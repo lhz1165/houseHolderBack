@@ -6,52 +6,32 @@ package com.example.householderback.exception;
  **/
 public class MyException extends RuntimeException{
     private String message;
-    private String code;
+    private Integer code;
 
     public MyException(String message) {
+        this.code = 500;
         this.message = message;
     }
 
-    public MyException(String message, String code) {
-        this.message = message;
-        this.code = code;
-    }
-
-    public MyException(String message, String message1, String code) {
-        super(message);
-        this.message = message1;
-        this.code = code;
-    }
-
-    public MyException(String message, Throwable cause, String message1, String code) {
-        super(message, cause);
-        this.message = message1;
-        this.code = code;
-    }
-
-    public MyException(Throwable cause, String message, String code) {
-        super(cause);
+    public MyException(String message, Integer code) {
         this.message = message;
         this.code = code;
     }
 
-    public MyException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace, String message1, String code) {
-        super(message, cause, enableSuppression, writableStackTrace);
-        this.message = message1;
-        this.code = code;
+    @Override
+    public String getMessage() {
+        return message;
     }
-
-
 
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 }

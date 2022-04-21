@@ -3,8 +3,17 @@ package com.example.householderback.entity.param;
 public class UpdateUserParam {
     Integer id;
     String picAddr;
+    String oldPass;
     String password;
     String password2;
+
+    public String getOldPass() {
+        return oldPass;
+    }
+
+    public void setOldPass(String oldPass) {
+        this.oldPass = oldPass;
+    }
 
     public String getPassword() {
         return password;

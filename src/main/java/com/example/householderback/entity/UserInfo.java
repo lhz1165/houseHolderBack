@@ -77,7 +77,7 @@ public class UserInfo implements Serializable {
     private String address;
 
     /**
-     * 户籍状态 1迁出/2迁出/3注销
+     * 户籍状态 1迁入/2迁出/3注销
      */
     private String status;
 
@@ -95,6 +95,20 @@ public class UserInfo implements Serializable {
      * 用户账号id
      */
     private Integer userId;
+
+    /**
+     * 是否完成支付
+     */
+    @TableField("is_paid")
+    private Boolean paid;
+
+    public Boolean getPaid() {
+        return paid;
+    }
+
+    public void setPaid(Boolean paid) {
+        this.paid = paid;
+    }
 
     public void setPassword(String password) {
 

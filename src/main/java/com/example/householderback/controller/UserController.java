@@ -3,12 +3,16 @@ package com.example.householderback.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.householderback.commom.Result;
+import com.example.householderback.entity.HouseHold;
 import com.example.householderback.entity.User;
+import com.example.householderback.entity.UserInfo;
 import com.example.householderback.entity.param.PageParam;
 import com.example.householderback.entity.param.UpdateUserParam;
 import com.example.householderback.entity.param.UserParam;
 import com.example.householderback.entity.vo.LoginUserVo;
 import com.example.householderback.service.AdminUserService;
+import com.example.householderback.service.IHouseHoldService;
+import com.example.householderback.service.IUserInfoService;
 import com.example.householderback.utils.LoginUser;
 import com.example.householderback.utils.SpringUtils;
 import io.swagger.annotations.Api;
@@ -19,6 +23,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author: lhz
@@ -31,7 +38,8 @@ public class UserController {
     @Autowired
     private AdminUserService userService;
 
-
+    @Autowired
+    private IUserInfoService userInfoService;
     /**
      * 注册登录
      */
@@ -95,7 +103,8 @@ public class UserController {
 
     @ApiOperation("page")
     @PostMapping("/user/page")
-    public Result<Page<User>> page(@RequestBody PageParam param) {
-        return Result.succeed(userService.lambdaQuery().eq(User::getType,"2").page(new Page<>(param.getCurrent(),param.getPageSize())));
+    public Result<Page<UserInfo>> page(@RequestBody PageParam param) {
+        //查询所有迁出的用户
+        return Result.succeed(userInfoService.lambdaQuery().eq(UserInfo::getStatus,"2").page(new Page<>(param.getCurrent(),param.getPageSize())));
     }
 }

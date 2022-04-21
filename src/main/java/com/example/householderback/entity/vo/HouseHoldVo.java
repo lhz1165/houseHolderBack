@@ -5,6 +5,9 @@ import com.example.householderback.entity.UserInfo;
 import java.util.List;
 
 public class HouseHoldVo {
+    /**
+     * 户号
+     */
     private Integer id;
 
     /**
@@ -16,10 +19,6 @@ public class HouseHoldVo {
      */
     private String address;
 
-    /**
-     * 户号
-     */
-    private Integer houseNo;
 
     /**
      * 总人数
@@ -29,7 +28,7 @@ public class HouseHoldVo {
     /**
      * 备注
      */
-    private String desc;
+    private String description;
 
 
     List<UserInfo> userInfos;
@@ -58,13 +57,7 @@ public class HouseHoldVo {
         this.address = address;
     }
 
-    public Integer getHouseNo() {
-        return houseNo;
-    }
 
-    public void setHouseNo(Integer houseNo) {
-        this.houseNo = houseNo;
-    }
 
     public Integer getPeopleCount() {
         return peopleCount;
@@ -74,12 +67,12 @@ public class HouseHoldVo {
         this.peopleCount = peopleCount;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<UserInfo> getUserInfos() {

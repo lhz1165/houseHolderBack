@@ -7,6 +7,7 @@ import com.example.householderback.commom.Result;
 import com.example.householderback.dao.UserMapper;
 import com.example.householderback.entity.User;
 import com.example.householderback.entity.param.UpdateUserParam;
+import com.example.householderback.exception.MyException;
 import com.example.householderback.service.AdminUserService;
 import com.example.householderback.utils.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
@@ -65,13 +66,17 @@ public class AdminUserServiceImpl extends ServiceImpl<UserMapper, User> implemen
     }
 
     @Override
-    public Result<Boolean> updatePass(UpdateUserParam param) {
+    public void updatePass(UpdateUserParam param) {
+        User user = lambdaQuery().eq(User::getId, param.getId()).one();
+        if (!user.getPassword().equals(param.getOldPass())) {
+            throw new MyException("原密码输入错误");
+        }
 
         if (!param.getPassword2().equals(param.getPassword())) {
-            return Result.failed("密码不一致");
+            throw new MyException("密码不一致");
         }
         lambdaUpdate().eq(User::getId,param.getId()).set(User::getPassword,param.getPassword()).update();
-        return Result.succeed();
+
     }
 
 

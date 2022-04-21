@@ -21,13 +21,15 @@ public class MoveServiceImpl  extends ServiceImpl<MoveMapper, Move> implements I
 
     @Override
     public Result<Void> updateMove(Move param) {
+
+        if (Objects.equals(param.getType(), "1") &&param.getHouseHoldId() == null) {
+            return Result.failed("户籍不能为空");
+        }
+
         if (param.getUsernames() == null||param.getUsernames().isEmpty()) {
             return Result.failed("用户不能为空");
         }
 
-        if (param.getType()=="1"&&param.getHouseHoldId() == null) {
-            return Result.failed("户籍不能为空");
-        }
 
         for (String username : param.getUsernames()) {
             Move move = new Move();
@@ -44,6 +46,7 @@ public class MoveServiceImpl  extends ServiceImpl<MoveMapper, Move> implements I
                         .eq(UserInfo::getUsername, username)
                         .set(UserInfo::getStatus, param.getType())
                         .set(UserInfo::getHouseholderId, param.getHouseHoldId())
+                        .set(UserInfo::getPaid, false)
                         .update();
                 //牵出
             }else {
@@ -51,6 +54,7 @@ public class MoveServiceImpl  extends ServiceImpl<MoveMapper, Move> implements I
                         .eq(UserInfo::getUsername, username)
                         .set(UserInfo::getStatus, param.getType())
                         .set(UserInfo::getHouseholderId, null)
+                        .set(UserInfo::getPaid, false)
                         .update();
             }
         }
@@ -70,7 +74,17 @@ public class MoveServiceImpl  extends ServiceImpl<MoveMapper, Move> implements I
                 return Result.failed("金额有误");
             }
         }
-        lambdaUpdate().eq(Move::getId,id).set(Move::getStatus,"2").update();
+        //更新用户
+        userInfoService.lambdaUpdate()
+                .eq(UserInfo::getUsername, move.getUsername())
+                .set(UserInfo::getPaid, true)
+                .update();
+
+        //更新支付列表
+        lambdaUpdate()
+                .eq(Move::getId,id)
+                .set(Move::getStatus,"2")
+                .update();
         return Result.succeed();
 
     }

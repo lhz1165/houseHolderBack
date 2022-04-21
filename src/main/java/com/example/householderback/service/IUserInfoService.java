@@ -24,4 +24,6 @@ public interface IUserInfoService extends IService<UserInfo> {
     UserInfoVo get(Integer uid);
 
     UserInfoVo getByUserName(String username);
+
+    void deleteOrRecover(UserInfo user);
 }

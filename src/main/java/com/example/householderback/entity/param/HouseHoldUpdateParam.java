@@ -1,9 +1,6 @@
 package com.example.householderback.entity.param;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 
-import java.util.List;
 
 public class HouseHoldUpdateParam {
     private Integer id;
@@ -20,7 +17,18 @@ public class HouseHoldUpdateParam {
     private String address;
 
 
+    /**
+     * 描述
+     */
+    private String description;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Integer getId() {
         return id;
