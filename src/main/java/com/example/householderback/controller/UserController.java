@@ -104,7 +104,12 @@ public class UserController {
     @ApiOperation("page")
     @PostMapping("/user/page")
     public Result<Page<UserInfo>> page(@RequestBody PageParam param) {
-        //查询所有迁出的用户
-        return Result.succeed(userInfoService.lambdaQuery().eq(UserInfo::getStatus,"2").page(new Page<>(param.getCurrent(),param.getPageSize())));
+        //查询所有迁出并且缴费的用户
+        Page<UserInfo> page = userInfoService
+                .lambdaQuery()
+                .eq(UserInfo::getStatus, "2")
+                .eq(UserInfo::getPaid,true)
+                .page(new Page<>(param.getCurrent(), param.getPageSize()));
+        return Result.succeed(page);
     }
 }

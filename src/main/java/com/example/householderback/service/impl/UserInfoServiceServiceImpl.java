@@ -10,6 +10,7 @@ import com.example.householderback.entity.User;
 import com.example.householderback.entity.UserInfo;
 import com.example.householderback.entity.param.UserInfoPageParam;
 import com.example.householderback.entity.vo.UserInfoVo;
+import com.example.householderback.exception.MyException;
 import com.example.householderback.service.AdminUserService;
 import com.example.householderback.service.IHouseHoldService;
 import com.example.householderback.service.IMoveService;
@@ -77,13 +78,15 @@ public class UserInfoServiceServiceImpl extends ServiceImpl<UserInfoMapper, User
     public List<UserInfo> ListByMove(String moveType,Integer houseId) {
         //1代表迁入 所以我们需要找到迁出的人才可去迁入
         if (Objects.equals(moveType, "1")) {
-            return lambdaQuery().eq(UserInfo::getStatus,"2").list();
+            return lambdaQuery().eq(UserInfo::getStatus,"2").eq(UserInfo::getPaid,true).list();
         }else {
             //2代表迁出 找到指定户籍号找到里面的人，
             // 并且不能是户主
             HouseHold houseHold = houseHoldService.lambdaQuery().eq(HouseHold::getId, houseId).one();
             String householder = houseHold.getHouseholder();
-            return lambdaQuery().eq(UserInfo::getStatus,"1")
+            return lambdaQuery()
+                    .eq(UserInfo::getStatus,"1")
+                    .eq(UserInfo::getPaid,true)
                     .eq(UserInfo::getHouseholderId,houseId)
                     .ne(UserInfo::getUsername,householder)
                     .list();
@@ -130,6 +133,14 @@ public class UserInfoServiceServiceImpl extends ServiceImpl<UserInfoMapper, User
 
     @Override
     public void deleteOrRecover(UserInfo user) {
-        lambdaUpdate().eq(UserInfo::getId, user.getId()).set(UserInfo::getHouseholderId, null).set(UserInfo::getStatus, user.getStatus()).update();
+        UserInfo currentUserInfo = getById(user.getId());
+        //户主不能注销
+        if (Objects.equals(user.getStatus(), "3")) {
+            HouseHold houseHold = houseHoldService.lambdaQuery().eq(HouseHold::getHouseholder, currentUserInfo.getUsername()).one();
+            if (houseHold != null) {
+                throw new MyException("户主不能注销");
+            }
+        }
+        lambdaUpdate().eq(UserInfo::getId, user.getId()).set(UserInfo::getHouseholderId, null).set(UserInfo::getPaid,true).set(UserInfo::getStatus, user.getStatus()).update();
     }
 }
