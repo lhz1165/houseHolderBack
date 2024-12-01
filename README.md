@@ -7,8 +7,9 @@
 **项目使用的软件**（需要下载的在我的[download_web_site](https://github.com/lhz1165/download_web_site) 仓库去找下载链接）
 
 1. idea2021
-2. mysql8(没有8的修改下application.properties的驱动就好了)
+2. mysql8.018(没有8的修改下application.properties的驱动就好了)
 3. mavne3.8
+4. nodejs 14
 
 **使用框架**:
 
